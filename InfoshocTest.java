@@ -7,7 +7,13 @@ import technify.business.ReturnValue;
 import technify.business.Song;
 import technify.business.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
@@ -25,6 +31,18 @@ public class InfoshocTest extends AbstractTest {
         User userNullName = createUser(2, null, "Switzerland", false);
         User userNullCountry = createUser(2, "Yngwie", null, false);
         //User userNullPremium = createUser(2, "Yngwie", "Switzerland", null);
+        User userInjectionName = createUser(
+                42,
+                "Rudolf', 'Germany', 'FALSE'); DROP TABLE users CASCADE; INSERT INTO users VALUES (43, 'Rudolf",
+                "Germany",
+                false
+        );
+        User userInjectionCountry = createUser(
+                44,
+                "Rudolf",
+                "'Germany', 'FALSE'); DROP TABLE users CASCADE; INSERT INTO users VALUES (2, 'Rudolf', 'Germany",
+                true
+        );
 
         assertEquals(BAD_PARAMS, Solution.addUser(user0));
         assertEquals(BAD_PARAMS, Solution.addUser(user0));
@@ -37,6 +55,11 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(BAD_PARAMS, Solution.addUser(userNullCountry));
 //        assertEquals(BAD_PARAMS, Solution.addUser(userNullPremium));
 //        assertEquals(BAD_PARAMS, Solution.addUser(userNullPremium));
+
+        assertOK(Solution.addUser(userInjectionName));
+        assertEquals(userInjectionName, Solution.getUserProfile(userInjectionName.getId()));
+        assertOK(Solution.addUser(userInjectionCountry));
+        assertEquals(userInjectionCountry, Solution.getUserProfile(userInjectionCountry.getId()));
 
         assertOK(Solution.addUser(user1a));
         assertEquals(ALREADY_EXISTS, Solution.addUser(user1a));
@@ -141,6 +164,33 @@ public class InfoshocTest extends AbstractTest {
         Song song3 = createSong(3, "Holy Diver", "Heavy Metal", null, 0);
         Song song4 = createSong(4, "Holy Diver", "Heavy Metal", "England", 0);
         Song song4Negative = createSong(4, "Holy Diver", "Heavy Metal", "England", -1);
+        Song songInjectionName = createSong(
+                42,
+                "Holy Diver', 'Heavy Metal', 'England'); " +
+                        "DROP TABLE  songs CASCADE; " +
+                        "INSERT INTO songs VALUES (43, 'Holy Diver",
+                "Heavy Metal",
+                "England",
+                0
+        );
+        Song songInjectionGenre = createSong(
+                43,
+                "Holy Diver",
+                "Heavy Metal', 'England');" +
+                        "DROP TABLE songs CASCADE;" +
+                        "INSERT INTO songs VALUES (44, 'Holy Diver', 'Heavy Metal",
+                "England",
+                0
+        );
+        Song songInjectionCountry = createSong(
+                44,
+                "Holy Diver",
+                "Heavy Metal",
+                "England');" +
+                        "DROP TABLE songs CASCADE;" +
+                        "INSERT INTO songs VALUES (-1, 'Holy Diver', 'Heavy Metal', '",
+                0
+        );
         
         assertEquals(BAD_PARAMS, Solution.addSong(songIdNegative));
         assertEquals(Song.badSong(), Solution.getSong(-1));
@@ -157,7 +207,14 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(BAD_PARAMS, Solution.addSong(song0));
         assertEquals(Song.badSong(), Solution.getSong(0));
         assertEquals(NOT_EXISTS, Solution.deleteSong(song0));
-        
+
+        assertOK(Solution.addSong(songInjectionName));
+        assertEquals(songInjectionName, Solution.getSong(songInjectionName.getId()));
+        assertOK(Solution.addSong(songInjectionGenre));
+        assertEquals(songInjectionGenre, Solution.getSong(songInjectionGenre.getId()));
+        assertOK(Solution.addSong(songInjectionCountry));
+        assertEquals(songInjectionCountry, Solution.getSong(songInjectionCountry.getId()));
+
         assertEquals(Song.badSong(), Solution.getSong(1));
         assertOK(Solution.addSong(song1_42));
         assertEquals(song1, Solution.getSong(1));
@@ -191,17 +248,26 @@ public class InfoshocTest extends AbstractTest {
         Song songGenreNull = createSong(1, "Holy Diver", null, "England", 0);
         Song song0 = createSong(0, "Holy Diver", "Heavy Metal", "England", 0);
         Song song1 = createSong(1, "Holy Diver", "Heavy Metal", "England", 0);
+        Song songInjection = createSong(3,
+                "Child' WHERE id = 3;\n" +
+                        "DROP TABLE songs CASCADE;\n" +
+                        "UPDATE songs SET name = 'Keeper",
+                "Heavy Metal",
+                null,
+                0
+        );
         
         assertOK(Solution.addSong(song3));
         assertOK(Solution.updateSongName(song3a));
         assertEquals(song3b, Solution.getSong(3));
         assertEquals(NOT_EXISTS, Solution.updateSongName(songIdNegative));
-        // TODO: verify with TA
         assertEquals(NOT_EXISTS, Solution.updateSongName(songNameNull));
         assertEquals(NOT_EXISTS, Solution.updateSongName(songGenreNull));
         assertEquals(NOT_EXISTS, Solution.updateSongName(song0));
         assertEquals(NOT_EXISTS, Solution.updateSongName(song1));
         assertEquals(BAD_PARAMS, Solution.updateSongName(song3NullName));
+        assertOK(Solution.updateSongName(songInjection));
+        assertEquals(songInjection, Solution.getSong(3));
     }
 
     @Test
@@ -213,11 +279,20 @@ public class InfoshocTest extends AbstractTest {
         Playlist playlist1 = createPlayList(1, "Heavy", "Maiden");
         Playlist playlist1a = createPlayList(1, "Heavy Metal", "Iron Maiden");
         Playlist playlist2 = createPlayList(2, "Heavy", "Maiden");
+        Playlist playlistInjection = createPlayList(
+                3,
+                "'; DROP TABLE playlists CASCADE; ",
+                "'; DROP TABLE playlists CASCADE; "
+        );
         
         assertEquals(BAD_PARAMS, Solution.addPlaylist(playlistNegative));
         assertEquals(BAD_PARAMS, Solution.addPlaylist(playlist0));
         assertEquals(BAD_PARAMS, Solution.addPlaylist(playlistNullGenre));
         assertEquals(BAD_PARAMS, Solution.addPlaylist(playlistNullDescription));
+
+        assertOK(Solution.addPlaylist(playlistInjection));
+        assertEquals(playlistInjection, Solution.getPlaylist(playlistInjection.getId()));
+
         assertOK(Solution.addPlaylist(playlist1));
         assertEquals(playlist1, Solution.getPlaylist(1));
         assertEquals(ALREADY_EXISTS, Solution.addPlaylist(playlist1a));
@@ -232,6 +307,7 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(-1));
         assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(0));
         assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(null));
+
     }
 
     @Test
@@ -243,6 +319,7 @@ public class InfoshocTest extends AbstractTest {
         Playlist playlist1a = createPlayList(1, "Hard", "Scorpions");
         Playlist playlist1b  = createPlayList(1, "Heavy", "Scorpions");
         Playlist playlist1Null = createPlayList(1, "Heavy", null);
+        Playlist playlistInjection = createPlayList(1, "Heavy", "'; DROP TABLE playlist CASCADE; ");
 
         assertEquals(NOT_EXISTS, Solution.updatePlaylist(playlist0));
         assertOK(Solution.addPlaylist(playlist1));
@@ -252,6 +329,10 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(playlist1, Solution.getPlaylist(1));
         assertOK(Solution.updatePlaylist(playlist1a));
         assertEquals(playlist1b, Solution.getPlaylist(1));
+        assertEquals(BAD_PARAMS, Solution.updatePlaylist(playlist1Null));
+        assertEquals(playlist1b, Solution.getPlaylist(1));
+        assertOK(Solution.updatePlaylist(playlistInjection));
+        assertEquals(playlistInjection, Solution.getPlaylist(1));
     }
 
     @Test
@@ -1052,6 +1133,8 @@ public class InfoshocTest extends AbstractTest {
         Song song3 = createSong(3, "Aren't", "Punk", "USA", 0);
         Song song4 = createSong(4, "All", "Punk", "USA", 0);
         Song song5 = createSong(5, "Right", "Punk", "USA", 0);
+        String injectionGenre = "'; DROP TABLE songs CASCADE;";
+        Song songInjectionGenre = createSong(42, "I Want Out", injectionGenre, "USA", 0);
 
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(null, null));
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(null, ""));
@@ -1113,6 +1196,109 @@ public class InfoshocTest extends AbstractTest {
             add(1);
         }}, Solution.getSongsRecommendationByGenre(2, "Punk"));
 
+        assertOK(Solution.addSong(songInjectionGenre));
+
+        assertEquals(new ArrayList<Integer>(){{add(42);}}, Solution.getSongsRecommendationByGenre(1, injectionGenre));
+    }
+
+    @Test
+    public void stress() {
+        int numberOfCommands = 42;
+        long seed = 42;
+        String[] countries = new String[] {"Israel", "Ukraine", "Germany", "England", "France", "Poland"};
+        String[] genres = new String[] {"Power", "Heavy", "Hard", "Punk", "Alternative", "Rock", "Metal"};
+        Map<Integer, User> idToUser = new HashMap<>();
+        Map<Integer, Song> idToSong = new HashMap<>();
+        Map<Integer, Playlist> idToPlayList = new HashMap<>();
+        Random random = new Random(seed);
+
+        for (int commandIndex = 0; commandIndex < numberOfCommands; ++commandIndex) {
+            int commandType = random.nextInt();
+
+            switch (commandType) {
+                case 0:
+                    User user = createUser(
+                            random.nextInt(2 * idToUser.size()),
+                            "",
+                            countries[random.nextInt(countries.length)],
+                            random.nextBoolean()
+                    );
+                    add(user.getId(), user, idToUser, Solution::addUser);
+                    break;
+
+                case 1:
+                    Song song = createSong(
+                            random.nextInt(2 * idToSong.size()),
+                            "",
+                            genres[random.nextInt(genres.length)],
+                            countries[random.nextInt(countries.length)],
+                            0
+                    );
+                    add(song.getId(), song, idToSong, Solution::addSong);
+                    break;
+
+                case 2:
+                    Playlist playlist = createPlayList(
+                            random.nextInt(2 * idToPlayList.size()),
+                            genres[random.nextInt(genres.length)],
+                            ""
+                    );
+                    add(playlist.getId(), playlist, idToPlayList, Solution::addPlaylist);
+                    break;
+
+                case 3:
+                    delete(random.nextInt(2 * idToUser.size()), idToUser, Solution::deleteUser);
+
+                    break;
+
+                case 4:
+                    delete(random.nextInt(2 * idToSong.size()), idToSong, Solution::deleteSong);
+
+                    break;
+
+                case 5:
+                    delete(random.nextInt(2 * idToPlayList.size()), idToPlayList, Solution::deletePlaylist);
+
+                    break;
+
+                case 6:
+                    int songId= random.nextInt(2 * idToSong.size());
+                    int times = random.nextInt(42);
+
+                    if (idToSong.containsKey(songId)) {
+                        int newPlayCount = idToSong.get(songId).getPlayCount() + times;
+                        if (newPlayCount >= 0) {
+                            assertOK(Solution.songPlay(songId, times));
+                            idToSong.get(songId).setPlayCount(newPlayCount);
+                        }
+                        else {
+                            assertEquals(BAD_PARAMS, Solution.songPlay(songId, times));
+                        }
+                    }
+                    else {
+                        assertEquals(NOT_EXISTS, Solution.songPlay(songId, times));
+                    }
+
+            }
+        }
+    }
+
+    private<T> void  add(int id, T value, Map<Integer, T> idToValue, Function<T, ReturnValue> adder) {
+        if (idToValue.containsKey(id)) {
+            assertEquals(ALREADY_EXISTS, adder.apply(value));
+        }
+        else {
+            idToValue.put(id, value);
+            assertEquals(OK, adder.apply(value));
+        }
+
+    }
+
+    private<T> void  delete(int id, Map<Integer, T> idToValue, Function<T, ReturnValue> deleter) {
+        if (idToValue.containsKey(id)) {
+            assertEquals(OK, deleter.apply(idToValue.get(id)));
+            idToValue.remove(id);
+        }
     }
 
     private Playlist createPlayList(Integer id, String genre, String description) {
