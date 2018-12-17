@@ -1,20 +1,16 @@
 package technify;
 
 import org.junit.Test;
-import sun.java2d.pipe.SolidTextRenderer;
 import technify.business.Playlist;
 import technify.business.ReturnValue;
 import technify.business.Song;
 import technify.business.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Callable;
 import java.util.function.Function;
-import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 import static technify.business.ReturnValue.*;
@@ -33,14 +29,14 @@ public class InfoshocTest extends AbstractTest {
         //User userNullPremium = createUser(2, "Yngwie", "Switzerland", null);
         User userInjectionName = createUser(
                 42,
-                "Rudolf', 'Germany', 'FALSE'); DROP TABLE users CASCADE; INSERT INTO users VALUES (43, 'Rudolf",
+                "Rudolf', 'Germany', 'FALSE'); DROP TABLE users CASCADE; --",
                 "Germany",
                 false
         );
         User userInjectionCountry = createUser(
                 44,
                 "Rudolf",
-                "'Germany', 'FALSE'); DROP TABLE users CASCADE; INSERT INTO users VALUES (2, 'Rudolf', 'Germany",
+                "'Germany', 'FALSE'); DROP TABLE users CASCADE; --",
                 true
         );
 
@@ -168,7 +164,7 @@ public class InfoshocTest extends AbstractTest {
                 42,
                 "Holy Diver', 'Heavy Metal', 'England'); " +
                         "DROP TABLE  songs CASCADE; " +
-                        "INSERT INTO songs VALUES (43, 'Holy Diver",
+                        "--",
                 "Heavy Metal",
                 "England",
                 0
@@ -178,7 +174,7 @@ public class InfoshocTest extends AbstractTest {
                 "Holy Diver",
                 "Heavy Metal', 'England');" +
                         "DROP TABLE songs CASCADE;" +
-                        "INSERT INTO songs VALUES (44, 'Holy Diver', 'Heavy Metal",
+                        "--",
                 "England",
                 0
         );
@@ -188,7 +184,7 @@ public class InfoshocTest extends AbstractTest {
                 "Heavy Metal",
                 "England');" +
                         "DROP TABLE songs CASCADE;" +
-                        "INSERT INTO songs VALUES (-1, 'Holy Diver', 'Heavy Metal', '",
+                        "--",
                 0
         );
         
@@ -251,7 +247,7 @@ public class InfoshocTest extends AbstractTest {
         Song songInjection = createSong(3,
                 "Child' WHERE id = 3;\n" +
                         "DROP TABLE songs CASCADE;\n" +
-                        "UPDATE songs SET name = 'Keeper",
+                        "--",
                 "Heavy Metal",
                 null,
                 0
@@ -281,8 +277,8 @@ public class InfoshocTest extends AbstractTest {
         Playlist playlist2 = createPlayList(2, "Heavy", "Maiden");
         Playlist playlistInjection = createPlayList(
                 3,
-                "'; DROP TABLE playlists CASCADE; ",
-                "'; DROP TABLE playlists CASCADE; "
+                "'; DROP TABLE playlists CASCADE; --",
+                "'; DROP TABLE playlists CASCADE; --"
         );
         
         assertEquals(BAD_PARAMS, Solution.addPlaylist(playlistNegative));
@@ -319,7 +315,7 @@ public class InfoshocTest extends AbstractTest {
         Playlist playlist1a = createPlayList(1, "Hard", "Scorpions");
         Playlist playlist1b  = createPlayList(1, "Heavy", "Scorpions");
         Playlist playlist1Null = createPlayList(1, "Heavy", null);
-        Playlist playlistInjection = createPlayList(1, "Heavy", "'; DROP TABLE playlist CASCADE; ");
+        Playlist playlistInjection = createPlayList(1, "Heavy", "'; DROP TABLE playlist CASCADE; --");
 
         assertEquals(NOT_EXISTS, Solution.updatePlaylist(playlist0));
         assertOK(Solution.addPlaylist(playlist1));
@@ -383,32 +379,32 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(2, 2));
         assertEquals(ALREADY_EXISTS, Solution.addSongToPlaylist(1, 2));
         assertEquals(ALREADY_EXISTS, Solution.addSongToPlaylist(2, 1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(null, null));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(null, -1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(null, 0));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(null, 1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(null, 2));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(null, 3));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(-1, null));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(-1, -1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(-1, 0));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(-1, 1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(-1, 2));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(-1, 3));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(0, null));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(0, 0));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(0, 1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(0, 2));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(0, 3));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(1, null));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(1, 0));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(1, 3));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(3, null));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(3, -1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(3, 0));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(3, 1));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(3, 2));
-        assertEquals(NOT_EXISTS, Solution.addSongToPlaylist(3, 3));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(null, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(null, -1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(null, 0));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(null, 1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(null, 2));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(null, 3));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, -1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 0));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 2));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 3));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 0));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 2));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 3));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, 0));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, 3));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, -1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 0));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 1));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 2));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 3));
 
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(null, null));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(null, -1));
@@ -1133,7 +1129,7 @@ public class InfoshocTest extends AbstractTest {
         Song song3 = createSong(3, "Aren't", "Punk", "USA", 0);
         Song song4 = createSong(4, "All", "Punk", "USA", 0);
         Song song5 = createSong(5, "Right", "Punk", "USA", 0);
-        String injectionGenre = "'; DROP TABLE songs CASCADE;";
+        String injectionGenre = "'; DROP TABLE songs CASCADE;--";
         Song songInjectionGenre = createSong(42, "I Want Out", injectionGenre, "USA", 0);
 
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(null, null));
