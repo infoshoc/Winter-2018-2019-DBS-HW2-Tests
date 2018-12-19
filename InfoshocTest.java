@@ -949,6 +949,46 @@ public class InfoshocTest extends AbstractTest {
     }
 
     @Test
+    public void hottestPlayListOnTechnifyTest2() {
+        Playlist playlist1 = createPlayList(1, "Industrial", "Rammstein");
+        Playlist playlist2 = createPlayList(2, "Power", "Avantasia");
+        Song song1 = createSong(1, "Rammstein", "Industrial", "Germany", 0);
+        Song song2 = createSong(2, "Scarecrow", "Power", "Germany", 0);
+        Song song3 = createSong(3, "Avantasia", "Power", "Germany", 0);
+
+        assertOK(Solution.addPlaylist(playlist1));
+        assertOK(Solution.addPlaylist(playlist2));
+
+        assertOK(Solution.addSong(song1));
+        assertOK(Solution.addSong(song2));
+        assertOK(Solution.addSong(song3));
+
+        assertOK(Solution.addSongToPlaylist(1, 1));
+        assertEquals(new ArrayList<Integer>(){{
+                add(1);
+        }}, Solution.hottestPlaylistsOnTechnify());
+        assertOK(Solution.songPlay(1, 4));
+        assertEquals(new ArrayList<Integer>(){{
+            add(1);
+        }}, Solution.hottestPlaylistsOnTechnify());
+        assertOK(Solution.addSongToPlaylist(2, 2));
+        assertEquals(new ArrayList<Integer>(){{
+            add(1);
+            add(2);
+        }}, Solution.hottestPlaylistsOnTechnify());
+        assertOK(Solution.songPlay(2, 9));
+        assertEquals(new ArrayList<Integer>(){{
+            add(2);
+            add(1);
+        }}, Solution.hottestPlaylistsOnTechnify());
+        assertOK(Solution.addSongToPlaylist(3, 2));
+        assertEquals(new ArrayList<Integer>(){{
+            add(1);
+            add(2);
+        }}, Solution.hottestPlaylistsOnTechnify());
+    }
+
+    @Test
     public void getSimilarUsersTest() {
         Playlist playlist1 = createPlayList(1, "Heavy", "Maiden");
         Playlist playlist2 = createPlayList(2, "Heavy", "Maiden");
