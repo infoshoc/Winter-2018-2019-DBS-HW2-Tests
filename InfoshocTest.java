@@ -379,54 +379,54 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(2, 2));
         assertEquals(ALREADY_EXISTS, Solution.addSongToPlaylist(1, 2));
         assertEquals(ALREADY_EXISTS, Solution.addSongToPlaylist(2, 1));
-        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, -1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 0));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 2));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 3));
-        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, -1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 0));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 2));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(-1, 3));
-        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 0));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 2));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(0, 3));
-        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, 0));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(1, 3));
-        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, null));
+        assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, -1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 0));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 1));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 2));
         assertEquals(BAD_PARAMS, Solution.addSongToPlaylist(3, 3));
 
-        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, null));
+        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, -1));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 0));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 1));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 2));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 3));
-        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, null));
+        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, -1));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, 0));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, 1));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, 2));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(-1, 3));
-        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(0, null));
+        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(0, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(0, 0));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(0, 1));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(0, 2));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(0, 3));
-        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(1, null));
+        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(1, 0));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(1, 3));
-        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(3, null));
+        assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(3, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(3, -1));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(3, 0));
         assertEquals(NOT_EXISTS, Solution.removeSongFromPlaylist(3, 1));
@@ -467,60 +467,60 @@ public class InfoshocTest extends AbstractTest {
         assertOK(Solution.addPlaylist(playlist1));
         assertOK(Solution.addPlaylist(playlist2));
 
-        assertEquals(NOT_EXISTS, Solution.followPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, null));
+        assertEquals(NOT_EXISTS, Solution.followPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, -1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 0));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 3));
 
-        assertEquals(NOT_EXISTS, Solution.followPlaylist(-1, null));
+        assertEquals(NOT_EXISTS, Solution.followPlaylist(-1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(-1, -1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(-1, 0));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(-1, 1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(-1, 3));
 
-        assertEquals(NOT_EXISTS, Solution.followPlaylist(0, null));
+        assertEquals(NOT_EXISTS, Solution.followPlaylist(0, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(0, -1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(0, 0));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(0, 1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(0, 3));
 
-        assertEquals(NOT_EXISTS, Solution.followPlaylist(1, null));
+        assertEquals(NOT_EXISTS, Solution.followPlaylist(1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(1, -1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(1, 0));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(1, 3));
 
-        assertEquals(NOT_EXISTS, Solution.followPlaylist(3, null));
+        assertEquals(NOT_EXISTS, Solution.followPlaylist(3, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(3, -1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(3, 0));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(3, 1));
         assertEquals(NOT_EXISTS, Solution.followPlaylist(3, 3));
 
 
-        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, null));
+        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, -1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 0));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, 3));
 
-        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(-1, null));
+        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(-1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(-1, -1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(-1, 0));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(-1, 1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(-1, 3));
 
-        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(0, null));
+        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(0, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(0, -1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(0, 0));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(0, 1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(0, 3));
 
-        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(1, null));
+        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(1, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(1, -1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(1, 0));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(1, 3));
 
-        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(3, null));
+        assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(3, MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(3, -1));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(3, 0));
         assertEquals(NOT_EXISTS, Solution.stopFollowPlaylist(3, 1));
@@ -1415,13 +1415,13 @@ public class InfoshocTest extends AbstractTest {
         String injectionGenre = "'; DROP TABLE songs CASCADE;--";
         Song songInjectionGenre = createSong(42, "I Want Out", injectionGenre, "USA", 0);
 
-        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, null));
+        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, MY_PERSONAL_NULL_STRING_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS, ""));
-        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(-1, null));
+        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(-1, MY_PERSONAL_NULL_STRING_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(-1, ""));
-        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(0, null));
+        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(0, MY_PERSONAL_NULL_STRING_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(0, ""));
-        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(1, null));
+        assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(1, MY_PERSONAL_NULL_STRING_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getSongsRecommendationByGenre(1, ""));
 
         assertOK(Solution.addSong(song1));
@@ -1618,4 +1618,5 @@ public class InfoshocTest extends AbstractTest {
 
     // It was promised then no function receives null...
     private static final Integer MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS = -1;
+    private static final String MY_PERSONAL_NULL_STRING_WITH_BLACK_JACK_AND_HOOKERS = "(-null=)";
 }
