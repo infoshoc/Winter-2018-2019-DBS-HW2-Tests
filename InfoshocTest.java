@@ -68,7 +68,7 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(user2, Solution.getUserProfile(user2.getId()));
         assertEquals(User.badUser(), Solution.getUserProfile(userNegative.getId()));
         assertEquals(User.badUser(), Solution.getUserProfile(user0.getId()));
-        assertEquals(User.badUser(), Solution.getUserProfile(null));
+        assertEquals(User.badUser(), Solution.getUserProfile(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
 
         assertEquals(NOT_EXISTS, Solution.deleteUser(user0));
         assertEquals(NOT_EXISTS, Solution.deleteUser(user0));
@@ -137,11 +137,11 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(user4, Solution.getUserProfile(4));
         assertEquals(ALREADY_EXISTS, Solution.updateUserNotPremium(2));
 
-        assertEquals(NOT_EXISTS, Solution.updateUserPremium(null));
+        assertEquals(NOT_EXISTS, Solution.updateUserPremium(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.updateUserPremium(-1));
         assertEquals(NOT_EXISTS, Solution.updateUserPremium(0));
         assertEquals(NOT_EXISTS, Solution.updateUserPremium(42));
-        assertEquals(NOT_EXISTS, Solution.updateUserNotPremium(null));
+        assertEquals(NOT_EXISTS, Solution.updateUserNotPremium(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(NOT_EXISTS, Solution.updateUserNotPremium(-1));
         assertEquals(NOT_EXISTS, Solution.updateUserNotPremium(0));
         assertEquals(NOT_EXISTS, Solution.updateUserNotPremium(42));
@@ -302,7 +302,7 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(NOT_EXISTS, Solution.deletePlaylist(playlist0));
         assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(-1));
         assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(0));
-        assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(null));
+        assertEquals(Playlist.badPlaylist(), Solution.getPlaylist(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
 
     }
 
@@ -557,7 +557,7 @@ public class InfoshocTest extends AbstractTest {
         assertEquals(Integer.valueOf(1), Solution.getPlaylistFollowersCount(1));
         assertEquals(Integer.valueOf(1), Solution.getPlaylistFollowersCount(2));
 
-        assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(null));
+        assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(-1));
         assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(0));
         assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(42));
@@ -581,7 +581,7 @@ public class InfoshocTest extends AbstractTest {
         assertOK(Solution.addSong(song4));
         assertOK(Solution.addSong(song5));
 
-        assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(null));
+        assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(-1));
         assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(0));
         assertEquals(Integer.valueOf(0), Solution.getPlaylistTotalPlayCount(3));
@@ -1058,7 +1058,7 @@ public class InfoshocTest extends AbstractTest {
         User[] users = new User[40];
         Playlist[] playLists = new Playlist[40];
 
-        assertEquals(new ArrayList<Integer>(), Solution.getPlaylistRecommendation(null));
+        assertEquals(new ArrayList<Integer>(), Solution.getPlaylistRecommendation(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getPlaylistRecommendation(-1));
         assertEquals(new ArrayList<Integer>(), Solution.getPlaylistRecommendation(0));
         assertEquals(new ArrayList<Integer>(), Solution.getPlaylistRecommendation(1));
@@ -1133,7 +1133,7 @@ public class InfoshocTest extends AbstractTest {
         Playlist playlist12 = createPlayList(12, "Alt", "");
         Playlist playlist13 = createPlayList(13, "Alt", "");
 
-        assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(null));
+        assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(-1));
         assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(0));
         assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(1));
@@ -1184,7 +1184,7 @@ public class InfoshocTest extends AbstractTest {
         assertOK(Solution.addSongToPlaylist(4, 5));
 
 
-        assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(null));
+        assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(MY_PERSONAL_NULL_INTEGER_WITH_BLACK_JACK_AND_HOOKERS));
         assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(-1));
         assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(0));
         assertEquals(new ArrayList<Integer>(), Solution.getTopCountryPlaylists(1));
